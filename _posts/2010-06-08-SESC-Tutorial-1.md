@@ -219,3 +219,102 @@ Success.
 
 
 
+## How to Build SESC source code
+
+1. Install CVS
+$sudo apt-get install cvs
+2. Download SESC source code by CVS
+$cvs -d:pserver:anonymous@sesc.cvs.sourceforge.net:/cvsroot/sesc login
+Note: just press Enter when password is requested.
+$cvs -z3 -d:pserver:anonymous@sesc.cvs.sourceforge.net:/cvsroot/sesc co -P sesc
+3. Move the source code to $HOME/esesc
+4. Read the $HOME/esesc/REAMME. It will give you some steps to install SESC.
+5. $cd ~
+6. $mkdir sesc-build
+7. $cd sesc-build
+8. $../esesc/configure
+Note: if you download SESC in Windows, you will meet the following error.
+ERROR: elif unexpected…
+REASON: cannot use DOS text format in Linux
+SOLVE: open configure by vim, :set ff=unix
+9. $sudo apt-get install binutils
+Note: this binutils is for building SESC source code. The binutils in sescutils is for building programs running on SESC.
+10 $make
+ERROR: USHRT_CHAR undefined
+SOLUTION: include limits.h file in esesc/src/libcore/FetchEngine.cpp file. Add
+#include <limits.h>
+11. $make
+ERROR:
+/home/manio/SESC/build/../esesc/src/libmint/subst.cpp:52:26: error: linux/dirent.h: No such file or directory
+SOLUTION:
+– Do not include linux/dirent.h, use dirent.h instead
+12. $make
+ERROR‘uint32_t’ was not declared in this scope
+SOLUTION: add #include <stdint.h> wherever you see this error.
+Reference:
+http://www1.cs.columbia.edu/~youngjin/discus/messages/54/59.html?1259617974
+Hi Alejandro,It maybe caused by the strictness of the C compiler provided in Ubuntu 9.10.
+(I had almost the same thing with 9.10.)As you mentioned, please try to include the
+following statement anytime you have the above-mentioned error:
+#include <stdint.h>
+13. $make
+ERROR: “/usr/bin/ld: cannot find -lz”
+SOLUTION: sudo apt-get install zlib1g-dev
+14. SUCCESS
+15. Test installation:
+$make testsim
+
+Output
+
+```
+manio@ubuntu:~/SESC/build$ make testsimmake[1]: `sesc.mem’ is up to date.Generating sesc.conf from: /home/manio/SESC/build/../esesc/confs/mem.conf
+cp /home/manio/SESC/build/../esesc/confs/mem.conf sesc.conf
+cp /home/manio/SESC/build/../esesc/confs/shared.conf .
+./sesc.mem -h0x800000 -csesc.conf /home/manio/SESC/build/../esesc/tests/crafty < /home/manio/SESC/build/../esesc/tests/tt.in
+static[0x1008db40-0x101b3dd4] heap[0x101b4000-0x109b4000] stack[0x109b4000-0x111ac000] -> [0x41000000-0x4211e4c0]
+Crafty v14.3
+sesc_simulation_mark 0 (simulated) @30176641
+White(1): sesc_simulation_mark 1 (simulated) @30225840
+White(1): pondering disabled.
+sesc_simulation_mark 2 (simulated) @30299339
+White(1): noise level set to 0.
+sesc_simulation_mark 3 (simulated) @30321649
+White(1): search time set to 99999.00.
+sesc_simulation_mark 4 (simulated) @30423769
+White(1): verbosity set to 5.
+sesc_simulation_mark 5 (simulated) @30449198
+White(1): sesc_simulation_mark 6 (simulated) @30751014
+White(1): search depth set to 2.
+sesc_simulation_mark 7 (simulated) @30767155
+White(1):
+clearing hash tables
+depth time score variation (1)
+1 ###.## -0.67 axb5 c6xb5
+1 ###.## -0.08 a4a5
+sesc_simulation_mark 8 (simulated) @33091197
+1-> ###.## -0.08 a4a5
+2 ###.## – a4a5
+2 ###.## -0.65 a4a5 f6f5
+2 ###.## -0.58 axb5 c6xb5 Ne4c5
+2 ###.## -0.46 Rf1c1 f6f5
+2 ###.## -0.43 Ra1c1 f6f5
+sesc_simulation_mark 9 (simulated) @37838384
+2-> ###.## -0.43 Ra1c1 f6f5
+time:### cpu:### mat:-1 n:833 nps: ####
+ext-> checks:18 recaps:4 pawns:0 1rep:6
+predicted:0 nodes:833 evals:372
+endgame tablebase-> probes done: 0 successful: 0
+hashing-> trans/ref:17% pawn:83% used:w0% b0%
+White(1): Ra1c1
+time used: ###.##
+sesc_simulation_mark 10 (simulated) @38879583
+Black(1): execution complete.
+```
+
+Here is another howto for installing SESC, by Girish Venkatasubramanian.
+
+
+
+
+
+
