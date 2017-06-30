@@ -102,6 +102,119 @@ Press enter to keep the default[*], or type selection number:
 
 
 
+## How to build SESC utils
+
+### What’s sescutils?
+
+Sescutils is a group of tools for building programs to run on SESC. These tools include gcc, gdb, glibc, etc.
+
+### Why do we need utils in SESC?
+
+Actually, sescutils is a cross-compile toolchain, which is used to compile programs on PC for running on MIPS. SESC is a MIPS architecture simulator.
+
+1. Download the sescutils from https://sourceforge.net/project/showfiles.php?group_id=49065
+2. move the package to your $HOME. My $HOME=/home/manio. In the following parts of this tutorial, I will use /home/manio directly. You should
+3. $cd $HOME
+4. $tar jxvf sescutils.tar.bz2
+5. make /bin/sh link to /bin/bash by:
+
+```
+sudo rm /bin/shsudo ln -s /bin/bash /bin/sh
+```
+
+Ubuntu uses dash, not bash. But the shell scripts in SESC are written by bash. So we have to change to bash.
+
+6. modify file build-common in /home/manio/sescutils/build-mipseb-linux
+
+```
+ GNUSRC=$HOME/sescutils/src
+ PREFIX=$HOME/sescutils/install
+```
+
+Note: GNUSRC is the position of the source codes. PREFIX is the position where the sescutils binary files will be installed to.
+
+7. $cd $HOME/sescutils/build-mipseb-linux
+8. $./build-1-binutils.
+error:
+
+```
+gcc -W -Wall -Wstrict-prototypes -Wmissing-prototypes -g -O2 -o ar arparse.o arlex.o ar.o not-ranlib.o arsup.o rename.o binemul.o emul_vanilla.o bucomm.o version.o filemode.o ../bfd/.libs/libbfd.a ../libiberty/libiberty.a ./../intl/libintl.aarlex.o: In function `main':
+/home/manio/sescutils/build-mipseb-linux/obj/binutils-build/binutils/arlex.c:1: multiple definition of `main'
+arparse.o:/home/manio/sescutils/build-mipseb-linux/obj/binutils-build/binutils/arparse.c:1: first defined here
+ar.o: In function `main':
+/home/manio/sescutils/src/binutils/binutils/ar.c:342: multiple definition of `main'
+arparse.o:/home/manio/sescutils/build-mipseb-linux/obj/binutils-build/binutils/arparse.c:1: first defined here
+bucomm.o: In function `make_tempname':
+/home/manio/sescutils/src/binutils/binutils/bucomm.c:425: warning: the use of `mktemp' is dangerous, better use `mkstemp' or `mkdtemp'
+ar.o: In function `mri_emul':
+```
+
+Note: These errors are caused by the missing of bison and flex, which are used to parse the codes. So, we install them in the following steps. Before installing, make sure you can access the internet.
+
+1. Install bison
+
+```
+$sudo apt-get install bison
+```
+2. $./build-1-binutils. Same error with 3
+3. $sudo apt-get install flex
+4. ./build-1-binutils
+Success
+5. $./build-2-gcc-core
+
+Note: if you use gcc 4.x to compile sescutils, you will meet this error. To solve this problem, change to gcc3.4 by following the How to Install old gcc3.4 by deb in Ubuntu 8.04.
+If you still can not get rid of the error, refer to the comments of this page. Your bison or flex should be the correct version.
+
+```
+gcc -c -g -O2 -DIN_GCC -DCROSS_COMPILE -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -pedantic -Wno-long-long -Wno-error -DHAVE_CONFIG_H -I. -I. -I/home/manio/sescutils/src/gcc-3.4/gcc/gcc -I/home/manio/sescutils/src/gcc-3.4/gcc/gcc/. -I/home/manio/sescutils/src/gcc-3.4/gcc/gcc/../include c-parse.c -o c-parse.ogcc: c-parse.c: No such file or directory
+gcc: no input files
+make[1]: *** [c-parse.o] Error 1
+make[1]: Leaving directory `/home/manio/sescutils/build-mipseb-linux/obj/gcc-core-build/gcc'
+make: *** [all-gcc] Error 2
+```
+
+6. $./build-3-glibc
+
+```
+manio@jun-desktop:~/sescutils/build-mipseb-linux$ ./build-3-glibcchecking build system type... Invalid configuration `unknown-linux': machine `unknown' not recognized
+configure: error: /bin/sh /home/manio/sescutils/src/glibc-2.3.2/scripts/config.sub unknown-linux failed
+```
+
+```
+make: *** No rule to make target `all'. Stop.
+```
+
+Note: This error is caused by the wrong value of BUILD in build-common file. The uname –p command cannot output the right version of the building system, i.e. your PC.
+To correct this problem, simply change the value of BUILD to “i686-pc-linux-gnu”. By the way, there is another value, host, which is the platform in which you want to run your compiled glibc. The target system is the platform in which you will run your program with glibc.
+
+The typical toolchain is: build=your pc, host=your pc, target=arm/mips…
+
+1. $./build-3-glibc
+Success.
+2. $./build-4-gcc
+Success
+3. $./build-5-gdb
+
+ERROR
+
+```
+checking for wctype... yeschecking for library containing gethostbyname... none required
+checking for library containing socketpair... none required
+checking for library containing waddstr... no
+checking for library containing tgetent... no
+configure: error: no termcap library found
+make: *** [configure-gdb] Error 1
+```
+
+Note: A lib is missing. Install it by the following steps.
+
+1. $ sudo apt-get install libncurses5-dev
+2. $./build-5-gdb
+Success.
+3. Now, the sescutils is completely built. You can use it to build programs for SESC later.
+
+
+
 
 
 
