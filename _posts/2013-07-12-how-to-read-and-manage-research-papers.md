@@ -7,16 +7,16 @@ categories: science
 
 
 <h2>Read</h2>
-If you are pursuing a PhD degree like I am, you need to read papers. The frequent problem that I meet is that I read and forget. A few days after reading a paper, I forget what it is about. This might be acceptable for certain papers that are not important to me. It is not acceptable for papers that are listed here http://research.cs.wisc.edu/areas/os/Qual/ . First of all, I have to pass the qualifying exam. Since I obviously cannot read all the fifty papers within 3 days before the exam, I have to distribute the papers to a long period. I am likely to forget some of the earlier ones. Second, these fifty papers and many other papers are important to my research/career. With a good understanding AND MEMORY of the papers, I might be able to develop better/newer ideas to solve the problems. Knowing what is old helps identifying what is new.<!--more-->
+
+If you are pursuing a PhD degree like I am, you need to read papers. The frequent problem that I meet is that I read and forget. A few days after reading a paper, I forget what it is about. This might be acceptable for certain papers that are not important to me. It is not acceptable for papers that are listed here http://research.cs.wisc.edu/areas/os/Qual/ . First of all, I have to pass the qualifying exam. Since I obviously cannot read all the fifty papers within 3 days before the exam, I have to distribute the papers to a long period. I am likely to forget some of the earlier ones. Second, these fifty papers and many other papers are important to my research/career. With a good understanding AND MEMORY of the papers, I might be able to develop better/newer ideas to solve the problems. Knowing what is old helps identifying what is new.
 
 I want to remember the key ideas of a paper, the problems the authors try to solve and the challenges they meet. When I forget, I want to have something that can help me recall it. When I need to take an exam/talk the paper to someone else, I want to have something that can help me recall more details of the paper - what the structure of the paper is? What each paragraph is about? Do I understand them? What are the limitations? What's the extension of the paper?...
 
 Although it is <strong>not about memory</strong>, this process of helping you recall the paper is expected (by me) to help getting better understanding of the paper. It is because you can only recall when you understand it before. The key of reading a paper is to "<strong>re-implement</strong>" the paper, or "<strong>say it in your own words</strong>". Often times, <strong>you thought you understood. But you don't really do until you can say it from your own word.</strong> And "say it in your own words" is equal to "answer an exam question", "tell someone you idea", or "write a paper". It forces you to truly understand the problem. One side benefit of "say it in your own words" is that you can review the problem by reading your own words, which is much faster than reading the paper again. To force you say it from your own words, you can imagine that you have an exam tomorrow and all the questions are from this paper.
+
 <h2>Example</h2>
-<div>
 
 I take a paper I read recently as an example. I do the following when reading a paper.
-<div>
 <ul>
     <li>Put the paper to Evernote and tag it with "paper", "to.read.list". Set an appropriate priority for it.</li>
     <li>Print and mark on the paper while reading. Holding a paper paper is better than holding a mouse and looking at an e-paper because: 1. easier to draw graphs for understanding, 2. easier to write a few words (in a pdf editor, you need to find the mouse, move to a insert position, switch to keyboard, type, adjust the position. Often you have to use sticky note tool and CLICK to see your comments.) 3. less distraction. you mouse may "<em>accidentally</em>" move to Facebook, Twitter... or some notifications may pop out and drag you away. Shut down/sleep your computer while reading a paper. Regarding marks, somebody says using a highlighter is better than underlining. I will try that.</li>
@@ -35,7 +35,6 @@ The paper that has been marked is <a href="wp-content/uploads/2013/07/ffs.pdf">h
 <hr />
 
 A Fast file system for unix
-<div>
 
 This is a very important paper in FS field. It presents techniques to improve the Unix file system's throughput by introducing cylinder group and cluster related data into the same group, by increasing the block size for better locality (larger single transfers), by enabling two block sizes for better fragment management. It compares the old file system and the new file system (presented in this paper). The old file system has a very low utilization at about 2%. The new file system can have up to 47% due to less disk seeks.
 
@@ -53,8 +52,6 @@ Directory is organized as directory chunks. Chunk size is fixed. A chunk consist
 
 <a href="http://ccr.sigcomm.org/online/files/p83-keshavA.pdf">This</a> article describes how to read papers by 3-pass technique.
 
-</div>
-</div>
 
 <hr />
 
@@ -62,5 +59,4 @@ Edit:
 <ul>
     <li>Drawing a mindmap to show the structure of the paper and illustrations is still essential to fast understanding of the paper</li>
 </ul>
-</div>
 
