@@ -8,7 +8,8 @@ categories: python IO systems
 
 Simple, access files with the same IO patterns but different languages (C++, Python) and see the difference. 
 
-<img src="../images/comparecpppython.png" alt="comparecpppython" width="641" height="405" class="aligncenter size-full wp-image-1068" />
+<!--<img src="../images/comparecpppython.png" alt="comparecpppython" width="641" height="405" class="aligncenter size-full wp-image-1068" />-->
+![image]({{ "/assets/images/comparecpppython.png" | absolute_url }})
 
 The performance depends on the pattern. It could be c++ < (less time than) pypy < python, or c++ = pypy = python, or python < pypy < c++, or ... For example, with pattern SeqSmallWriteNoFsync, python < pypy < c++. Python might have cached write without actually making the system calls. 
 

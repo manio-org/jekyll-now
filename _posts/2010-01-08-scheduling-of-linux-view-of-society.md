@@ -15,7 +15,7 @@ Linux内核是一个无比复杂的系统，要想看清大致的脉络也非易
 
 以下是此公司的平面图：
 
-<a href="../images/RoomScale.png"></a><a href="../images/RoomScale1.png"><img class="alignnone size-full wp-image-31" title="RoomScale" src="../images/RoomScale1.png" alt="" /></a><a href="../images/RoomScale.png"></a>
+![roomscale1]({{ "/assets/images/RoomScale1.png" | absolute_url }})
 
 图解：“推门”是单向的：比如连接工作室和太平间的是推门，职员只能从工作室走到太平间，不能从太平间走到工作室（这太吓人了）。“凹槽门”是双向的：比如连接工作室和休息室的门是凹槽门，职员可以走来走去。
 
@@ -39,7 +39,7 @@ Personal History Statement of Mr. Process （Mr. P in short）<strong> </strong>
 
 在这里为了问题的简化，就只讨论与调度的关系比较紧密的内容。
 
-<a href="../images/roomscale_addedQueue1.png"><img class="alignnone size-full wp-image-33" title="roomscale_addedQueue" src="../images/roomscale_addedQueue1.png" alt="" /></a><a href="../images/roomscale_addedQueue.png"></a>
+![image]({{ "/assets/images/roomscale_addedQueue1.png" | absolute_url }})
 
 图：详细的公司平面图
 

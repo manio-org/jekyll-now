@@ -24,6 +24,4 @@ categories: OS
 
 这个世界本来就是一场场博弈。
 
-<img src="../images/DSCF1495-e1317706755571.jpg" alt="" width="500" height="375" />
-
 
