@@ -48,15 +48,5 @@ Performance. In the old file system, write is faster than read because the data 
 
 Directory is organized as directory chunks. Chunk size is fixed. A chunk consists of directory entries with varying sizes.
 
-<hr />
-
 <a href="http://ccr.sigcomm.org/online/files/p83-keshavA.pdf">This</a> article describes how to read papers by 3-pass technique.
-
-
-<hr />
-
-Edit:
-<ul>
-    <li>Drawing a mindmap to show the structure of the paper and illustrations is still essential to fast understanding of the paper</li>
-</ul>
 

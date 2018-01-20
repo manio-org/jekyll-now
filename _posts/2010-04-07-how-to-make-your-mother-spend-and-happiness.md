@@ -30,7 +30,7 @@ categories: happiness
 
 生活中就应该寻找不容易被适应的快乐，这样的快乐可以更持久。
 <h3>快乐的薪水</h3>
-<a href="../images/salary.png"><img class="alignnone size-full wp-image-128" title="salary" src="../images/salary.png" alt="" width="486" height="616" /></a>
+![]({{ "/assets/images/salary.png" | absolute_url }})
 
 上面的两种薪水，你愿意选哪种？第一个图中的薪水大部分时间维持在一个状态，有少数时间突然变得很高。第二个图中的薪水有时会变得很低。总的说来，第一个图中积累的薪水比第二个图高。
 

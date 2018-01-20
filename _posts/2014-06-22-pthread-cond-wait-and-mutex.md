@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "pthread_cond_wait 为什么需要传递 mutex 参数?"
-date:   2012-02-02
+date:   2014-06-22
 categories: OS
 ---
 
