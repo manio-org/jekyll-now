@@ -20,6 +20,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://manio.org" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 #github_username:  jekyll
+permalink: /:year/:month/:day/:title.html
 
 # Build settings
 markdown: kramdown
