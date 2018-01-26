@@ -2,7 +2,7 @@
 layout: post
 title:  "怎么让老妈花钱 + 幸福学"
 date:   2010-04-07
-categories: happiness
+categories: cn
 ---
 
 

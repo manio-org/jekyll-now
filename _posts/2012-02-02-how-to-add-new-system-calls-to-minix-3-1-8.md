@@ -2,7 +2,7 @@
 layout: post
 title:  "How to Add New System Calls to Minix 3.1.8"
 date:   2012-02-02
-categories: OS
+categories: en
 ---
 
 

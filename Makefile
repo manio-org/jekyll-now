@@ -1,5 +1,5 @@
 all:
-	bundle exec jekyll serve
+	bundle exec jekyll serve --drafts
 
 setup:
 	gem install jekyll-gist
