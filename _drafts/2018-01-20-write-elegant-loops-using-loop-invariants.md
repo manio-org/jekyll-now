@@ -37,7 +37,7 @@ a given number in a sorted array.
 Let us explain what a loop invariant is by the following code, which moves the `1`s
 from `a` to `b`.
 
-```
+``` c
 int a = 10
 int b = 0;
 
@@ -56,9 +56,8 @@ while (a != 0) {                         (B)
 `a + b == 10` is one of the loop invariants of the loop. The invariant is true
 at marked locations. `a != 0` is the loop condition. We know the loop condition
 is _false_ after the loop; we also know that the loop invariant is _true_ after
-loop.  Combining these two conditions, we get the post condition (`a == 0 && a
-+ b == 10`) which indicates `b == 0`. Now we know for sure that all the `1` in
-  `a` has been moved to `b`.
+loop.  Combining these two conditions, we get the post condition 
+(`a == 0 && a + b == 10`) which indicates `b == 0`. Now we know for sure that all the `1` in `a` has been moved to `b`.
 
 Loop invariant (A) must be true right before `while`, otherwise it will not be
 true at the beginning of the loop (C), because line (B) changes nothing.
@@ -72,9 +71,9 @@ Now, writing an elegant loop becomes:
 2. Determine a loop condition so `loop condition == False && loop invariant == true` 
 is what you want when the loop finishes.
 
-Let's practice by examing two examples.
+Let's practice by examining two examples.
 
-# Example 2: Linus's Taste
+# Example 1: Linus's Taste
 
 In a TED interview, Linus gave the following piece of code to show what a
 bad taste of code is. 
@@ -86,7 +85,6 @@ remove_list_entry_01(entry)
     walk = head;
 
     // Walk the list
-
     while (walk != entry) {
         prev = walk;
         walk = walk->next;
@@ -94,7 +92,6 @@ remove_list_entry_01(entry)
 
     // Remove the entry by updating the
     // head or the previous entry
-
     if (!prev)
         head = entry->next;
     else
@@ -106,7 +103,7 @@ The diagram below is an illustration of the basic data structure.
 
 ![Simple Link List]({{ "/assets/images/simple-link-list.png" | absolute_url }})
 
-Linus hates the code because it has to handle a special case 9the `if` statement)
+Linus hates the code because it has to handle a special case (the `if` statement)
 after the loop. He argued that the programmer failed to see the common pattern
 between the specical case and the regular case. 
 
@@ -124,9 +121,6 @@ None of the nodes before `walk` is equal to `entry`.
 ```
 
 
-![Link List with header]({{ "/assets/images/link-list-with-header.png" | absolute_url }})
-
-![Link List with imaginary header]({{ "/assets/images/link-list-with-imaginary-header.png" | absolute_url }})
 
 So the post condition is:
 
@@ -149,12 +143,16 @@ None of the nodes before `walk` is equal to `entry`
 
 We can make this loop invariant happen by adding header node, so that even
 if the loop never executes, `prev` always points to a node before `walk`.
+The initial structure is shown below.
 
-```
+![Link List with header]({{ "/assets/images/link-list-with-header.png" | absolute_url }})
+
+
+``` c
 /*
 Header -> Node1 -> Node2 -> ...
 */
-remove_list_entry(entry)
+remove_list_entry_02(entry)
 {
     prev = head; // head points to Header
     walk = head->next;
@@ -173,12 +171,11 @@ But this is overkill because it consumes more memory.
 
 ## Loop invariant of the elegant loop
 
-
-Linus then gave the following code, which eliminates the special case
-by introducing a pointer that points to the variable that will update.
+Linus gave the following elegant solution, which eliminates the special case by
+introducing a pointer that points to the variable that will update.
 
 ``` c
-remove_list_entry_02(entry)
+remove_list_entry_03(entry)
 {
     // The "indirect" pointer points to the
     // *address* of the thing we'll update
@@ -194,17 +191,52 @@ remove_list_entry_02(entry)
 }
 ```
 
+This solution can be illustrated by the diagram below. Let us imagine that
+there is a imaginary header node just like the one in `remove_list_entry_02()`.
+`head` can be thought as the `next` member of the header node. `indirect` could
+have pointed to the imaginary header node if it really existed. In reality, we
+make `indirect` point to `head`, which is the `next` of the imaginary header
+node.
 
+![Link List with imaginary header]({{ "/assets/images/link-list-with-imaginary-header.png" | absolute_url }})
 
-In the elegant `remove_list_entry_02()`, the loop invariant is:
+In `remove_list_entry_03()`, the loop invariant is
 
 ```
-`indirect` points to a pointer that is to be updated
+`indirect` points to the memory location of node.next`, 
+where `node` and nodes before `node` are not equal to `entry`
 ```
 
+At the very beginning, `indirect` points to the imaginary header node, which
+is for sure not equal to `entry` (because the imaginary header does not exist).
+
+The post condition is
+
+```
+`indirect` points to the memory location of node.next`, 
+where `node` and nodes before `node` are not equal to `entry`
+&& 
+node.next == entry
+```
+
+The diagram below shows a possible state after the loop, where `indirect` points
+to the `next` of the node to be modified.
+
+![Link List last state]({{ "/assets/images/link-list-last-state.png" | absolute_url }})
+
+**To find an elegant loop invariant, you probably need to draw diagrams like
+the ones above to find the common pattern between special cases and regular cases.**
+
+
+# Example 2: looking for a number
 
 
 
 
-# Example 1: looking for a number
+
+
+
+
+
+
 
