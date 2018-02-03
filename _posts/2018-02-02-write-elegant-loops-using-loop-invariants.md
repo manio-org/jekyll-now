@@ -5,14 +5,14 @@ date:   2018-02-02
 categories: coding
 ---
 
-Writing loops is an essential part of programming; but writing elegant loops is
+Writing loops is an essential part of programming, but writing elegant loops is
 not easy. For example, in [an
 interview](https://www.ted.com/talks/linus_torvalds_the_mind_behind_linux)
 Linus showed a commonly used piece of code which delete an entry in a
 link list (we will discuss this example). The task was simple but the loop in
 the solution was ugly.
 
-Writing loops is hard becuase multiple variables changes. Keeping track of
+Writing loops is hard because multiple variables changes. Keeping track of
 these variables and making sure they are in the right states require lots of
 mental energy.
 
@@ -26,9 +26,9 @@ loops.
 
 Here are some smells of ugly loops:
 
-1. Muliple exit conditions in the loop body, which make it hard to determine
+1. Multiple exit conditions in the loop body, which make it hard to determine
 the exit state of the loop.
-2. Specical case handling before or after the loop. For example, treating
+2. Special case handling before or after the loop. For example, treating
 the first or the last element of an array differently.
 
 
@@ -64,10 +64,10 @@ also know that the loop invariant is _true_. Combining these two
 conditions, we get the post condition (`a == 0 && a + b == 10`) which indicates
 `b == 10`. Now we know for sure that all the `1` in `a` has been moved to `b`.
 
-Loop invariant must be true right before `while` (at (A)), otherwise it will not be
+Loop invariant must be true right before `while` (at (A)); otherwise, it will not be
 true at the beginning of the loop (at (C)), because line (B) changes nothing.
 
-Note that if the loop body does not execute at all (because the loop codition
+Note that if the loop body does not execute at all (because the loop condition
 is false), the loop invariant set at (A) still holds after the loop (E).
 
 Now, writing an elegant loop becomes:
@@ -110,7 +110,7 @@ pointer that points to the head of the linked list.
 
 Linus hates the code because it has to handle a special case (the `if` statement)
 after the loop. He argued that the programmer failed to see the common pattern
-between the specical case and the regular cases. 
+between the special case and the regular cases. 
 
 I think the programmer wrote the ugly `remove_list_entry_01()` because 
 he/she did not find a good loop invariant.
@@ -135,7 +135,7 @@ The post condition is:
 `walk == entry` && none of the nodes before `walk` is equal to `entry`.
 ```
 
-The reason that `remove_list_entry_01()` has to handle a specical case is 
+The reason that `remove_list_entry_01()` has to handle a special case is 
 that `prev` is not in the loop invariant. Depending on whether the loop
 has been executed, `prev` can be `NULL`, or pointing to a valid node.
 
@@ -245,7 +245,7 @@ assumption is that the number we look for is close to the beginning of the
 array, so we should look for the number from the beginning.
 
 So, this is what we will do: we will check the numbers from the beginning one by
-one until we find a number that is larger than or equal to `x`. Here is an implementaion:
+one until we find a number that is larger than or equal to `x`. Here is an implementation:
 
 ``` c
 // n is the size of the array
@@ -263,14 +263,14 @@ int skip_01(int array[], int n, int x) {
 ```
 
 Although the code is short, it still takes some time to reason about its correctness 
-because the loop has multiple exist points. You may need to validate the following
+because the loop has multiple exit points. You may need to validate the following
 cases one by one to see if the function returns the right value.
 
 1. what if the loop body is never run because `array[0] < x == false`
 2. what if the size of the array is 0 (in which the code above fails)
 3. what if the size of the array is 1 (a common corner case)
-4. what if the we cannot find a number that is larger than or equal to `x`
-5. what if the number we find is the last one in the array (a coner case you may want to check)
+4. what if we cannot find a number that is larger than or equal to `x`
+5. what if the number we find is the last one in the array (a corner case you may want to check)
 6. how about a regular case
 
 Let's use loop invariant so we do not need to worry about any of the above. After a few trials,
@@ -355,12 +355,12 @@ i != n AND array[i] >= x AND numbers in array[-infinity...i - 1] are less than `
 In plain English, they mean either of the following
 
 1. `i` points to the element right after the last existing element of the array and 
-all numbers in the array are less then `x`.
-2. `array[i]` is larger than or equal to `x` and all numbers before `array[i]` are less then `x`.
+all numbers in the array are less than `x`.
+2. `array[i]` is larger than or equal to `x` and all numbers before `array[i]` are less than `x`.
 
-The proof is not rigid, but in practice it is sufficient to help us write better loops.
-A nice thing of using loop invariants is that it is **a uniform way of thinking about 
-loops**. In contrast, people often use adhoc methods to reason about loops and worry 
+The proof is not rigid, but in practice, it is sufficient to help us write better loops.
+A nice thing about using loop invariants is that it is **a uniform way of thinking about 
+loops**. In contrast, people often use ad-hoc methods to reason about loops and worry 
 about their correctness.
 
 
