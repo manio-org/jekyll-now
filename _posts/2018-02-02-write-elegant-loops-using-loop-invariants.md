@@ -115,7 +115,7 @@ between the special case and the regular cases.
 I think the programmer wrote the ugly `remove_list_entry_01()` because 
 he/she did not find a good loop invariant.
 
-## Loop invariant of the ugly loop
+### Loop invariant of the ugly loop
 
 In `remove_list_entry_01()`, the loop invariant is:
 
@@ -175,7 +175,7 @@ remove_list_entry_02(entry)
 But this is overkill because it consumes more memory. 
 
 
-## Find a better loop invariant
+### Find a better loop invariant
 
 Linus gave the following elegant solution, which eliminates the special case by
 introducing a pointer that points to the variable that we will update.
