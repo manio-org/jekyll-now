@@ -4,5 +4,5 @@ title: About
 permalink: /about/
 ---
 
-I reserach, code, and cook @Wisconsin.
+I research, code, and cook @Wisconsin.
 
